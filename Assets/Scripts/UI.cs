@@ -12,7 +12,7 @@ public class UI : MonoBehaviour
 
     public void ChangeCoinText(int value)
     {
-        coinText.text = String.Format("Coins: {0}", value);
+        coinText.text = value.ToString();
     }
 
     public void EnableEndPanel()

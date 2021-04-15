@@ -2,12 +2,16 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
     private Rigidbody rigidbody;
+    private Animator animator;
 
     [SerializeField]
     private float jumpForce;
+    [SerializeField]
+    private AudioSource getPointSound, dieSound, jumpSound;
 
     public bool die = false;
     public UnityEvent StartEvent, DieEvent;
@@ -16,6 +20,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     public void Jump()
@@ -23,23 +28,28 @@ public class Player : MonoBehaviour
         if (!die)
         {
             rigidbody.AddForce(Vector3.up * jumpForce);
+            jumpSound.Play();
+            
         }
     }
     public void StartGame()
     {
         rigidbody.isKinematic = false;
         StartEvent.Invoke();
+        jumpSound.Play();
     }
 
     private void Die()
     {
         die = true;
         DieEvent.Invoke();
+        dieSound.Play();
+        animator.SetTrigger("Die");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Barrier"))
+        if (collision.gameObject.CompareTag("Barrier") && !die)
         {
             Die();
         }
@@ -47,13 +57,17 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Coin"))
+        if (!die)
         {
-            GetCoinEvent.Invoke(1);
-        }
-        else if (other.gameObject.CompareTag("Barrier"))
-        {
-            Die();
+            if (other.gameObject.CompareTag("Coin"))
+            {
+                GetCoinEvent.Invoke(1);
+                getPointSound.Play();
+            }
+            else if (other.gameObject.CompareTag("Barrier"))
+            {
+                Die();
+            }
         }
     }
 }
