@@ -34,5 +34,9 @@ public class PlayerInput : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
             }
         }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }
