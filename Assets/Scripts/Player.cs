@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(Vector3.up * jumpForce);
             jumpSound.Play();
-            
         }
     }
     public void StartGame()
