@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(Vector3.up * jumpForce);
             jumpSound.Play();
+            animator.SetTrigger("Move");
         }
     }
     public void StartGame()
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
         die = true;
         DieEvent.Invoke();
         dieSound.Play();
-        animator.SetTrigger("Die");
+        animator.SetBool("Die", true);
     }
 
     private void OnCollisionEnter(Collision collision)
