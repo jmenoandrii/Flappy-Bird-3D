@@ -1,5 +1,5 @@
 # Flappy-Bird-3D
-My attempt to replicate the Flappy Bird game, but in 3D. The game was created on the Unity 2022.3.7f1 engine, and I created the models myself using MagicaVoxel
+My attempt to replicate the Flappy Bird game, but in 3D. The game was created on the Unity 2022.3.7f1 engine, and I created the models myself using MagicaVoxel. A simple arcade game that I made in 1-2 days
 
 If you want to run it through Unity, use version 2022.3.7f1.
 
